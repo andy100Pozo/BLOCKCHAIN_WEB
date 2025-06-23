@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 25px 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #0056b3;
+        }
+        p {
+            font-size: 18px;
+        }
+        a.button {
+            display: inline-block;
+            margin: 10px 5px 10px 0;
+            padding: 10px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        a.button:hover {
+            background-color: #0056b3;
+        }
+        a.logout {
+            background-color: #dc3545;
+            float: right;
+        }
+        a.logout:hover {
+            background-color: #bd2130;
+        }
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        hr {
+            margin: 25px 0;
+            border: none;
+            border-top: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="clearfix">
+        <a th:href="@{/login}" class="button logout">Cerrar sesión</a>
+    </div>
+
+    <h2>Bienvenido <span th:text="${usuario.nomcompleto}">Usuario</span></h2>
+    <p>Saldo actual: <strong>S/. <span th:text="${usuario.saldo}">0.00</span></strong></p>
+
+    <!-- Opciones para usuario tipo USER -->
+    <div th:if="${#authorization.expression('hasRole(''USER'')')}">
+        <a th:href="@{/transferencia}" class="button">Realizar Transferencia</a>
+    </div>
+
+    <!-- Opciones para usuario tipo ADMIN -->
+    <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+        <hr>
+        <a th:href="@{/admin/transacciones}" class="button">Ver Transacciones</a>
+        <a th:href="@{/admin/ganancias}" class="button">Ver Ganancias</a>
+        <a th:href="@{/blockchain}" class="button">Ver Blockchain</a>
+    </div>
+</div>
+</body>
+</html>

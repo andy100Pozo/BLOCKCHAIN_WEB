@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadena de Bloques</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 25px 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #0056b3;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        a.button {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #6c757d;
+            color: white;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        a.button:hover {
+            background-color: #5a6268;
+        }
+        .hash-cell {
+            font-family: monospace;
+            font-size: 12px;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Cadena de Bloques</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Hash</th>
+            <th>Hash Anterior</th>
+            <th>Nonce</th>
+            <th>Timestamp</th>
+            <th>Transacciones</th>
+        </tr>
+        <tr th:each="b : ${blocks}">
+            <td th:text="${b.id}">1</td>
+            <td th:text="${b.hash}" class="hash-cell"></td>
+            <td th:text="${b.previousHash}" class="hash-cell"></td>
+            <td th:text="${b.nonce}"></td>
+            <td th:text="${b.timeStamp}"></td>
+            <td th:text="${b.transacciones}"></td>
+        </tr>
+    </table>
+
+    <a th:href="@{/home}" class="button">Volver al inicio</a>
+</div>
+</body>
+</html>
